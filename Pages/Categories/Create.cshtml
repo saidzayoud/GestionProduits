@@ -1,0 +1,28 @@
+@page
+@model GestionProduits.Pages.Categories.CreateModel
+@{ ViewData["Title"] = "Nouvelle catégorie"; }
+
+<div class="card card-modern form-card p-4">
+    <div class="card-body">
+        <h1 class="mb-3">Nouvelle catégorie</h1>
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Categorie.Nom" class="form-label"></label>
+                <input asp-for="Categorie.Nom" class="form-control" />
+                <span asp-validation-for="Categorie.Nom" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success btn-pill">Enregistrer</button>
+                <a asp-page="Index" class="btn btn-secondary btn-pill">Annuler</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,45 @@
+@page
+@model GestionProduits.Pages.Produits.CreateModel
+@{ ViewData["Title"] = "Nouveau produit"; }
+
+<div class="card card-modern form-card p-4">
+    <div class="card-body">
+        <h1 class="mb-3">Nouveau produit</h1>
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Produit.Nom" class="form-label"></label>
+                <input asp-for="Produit.Nom" class="form-control" />
+                <span asp-validation-for="Produit.Nom" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Produit.Prix" class="form-label"></label>
+                <input asp-for="Produit.Prix" class="form-control" />
+                <span asp-validation-for="Produit.Prix" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Produit.CategorieId" class="form-label"></label>
+                <select asp-for="Produit.CategorieId" asp-items="Model.Categories" class="form-select"></select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Produit.Stock" class="form-label"></label>
+                <input asp-for="Produit.Stock" class="form-control" />
+                <span asp-validation-for="Produit.Stock" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success btn-pill">Enregistrer</button>
+                <a asp-page="Index" class="btn btn-secondary btn-pill">Annuler</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

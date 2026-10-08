@@ -1,0 +1,29 @@
+﻿@page
+@model GestionProduits.Pages.IndexModel
+
+@{
+ViewData["Title"] = "Accueil";
+}
+
+<section class="py-5">
+    <div class="card card-modern p-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1>Gestion de produits</h1>
+                <p class="lead">Application simple pour gérer vos produits et catégories. Interface moderne, épurée et réactive.</p>
+                <a asp-page="/Produits/Index" class="btn btn-primary btn-pill me-2">📦 Produits</a>
+                <a asp-page="/Categories/Index" class="btn btn-outline-primary btn-pill">🗂️ Catégories</a>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect width="24" height="24" rx="6" fill="#eef6ff" />
+                    <path d="M4 7h16M4 12h10M4 17h16" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

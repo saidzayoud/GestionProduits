@@ -1,0 +1,78 @@
+@page
+@model GestionProduits.Pages.Produits.IndexModel
+@{ ViewData["Title"] = "Produits"; }
+
+<div class="card card-modern">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="mb-0">Liste des produits</h1>
+            <div>
+                <a asp-page="Create" class="btn btn-primary btn-pill">
+                    "+"&nbsp;Nouveau produit
+                </a>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form id="searchForm" class="d-flex" method="get">
+                    <input id="searchInput" name="q" class="form-control me-2" type="search" placeholder="Rechercher un produit..." aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">Rechercher</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-modern w-100">
+                <thead>
+                    <tr><th>Nom</th><th>Prix</th><th>Catégorie</th><th class="text-end">Actions</th></tr>
+                </thead>
+                <tbody>
+                @foreach (var p in Model.Produits)
+                {
+                    <tr>
+                        <td>@p.Nom</td>
+                        <td>@p.Prix.ToString("C")</td>
+                        <td>@p.Categorie?.Nom</td>
+                        <td class="text-end">
+                            <a asp-page="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-primary me-2">Modifier</a>
+                            <a asp-page="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-end mt-3 gap-3">
+            <span class="badge bg-light text-muted">Total produits: @Model.Produits.Count</span>
+            <span class="badge bg-light text-muted">Prix moyen: @((Model.Produits.Any()) ? Model.Produits.Average(p => p.Prix).ToString("C") : "-")</span>
+        </div>
+    </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            var form = document.getElementById('searchForm');
+            var input = document.getElementById('searchInput');
+            if(!form || !input) return;
+            var rows = Array.from(document.querySelectorAll('table.table-modern tbody tr'));
+
+            function filterRows(){
+                var q = input.value.trim().toLowerCase();
+                if(!q){
+                    rows.forEach(function(r){ r.style.display = ''; });
+                    return;
+                }
+                rows.forEach(function(r){
+                    var text = r.innerText.toLowerCase();
+                    r.style.display = text.indexOf(q) !== -1 ? '' : 'none';
+                });
+            }
+
+            input.addEventListener('input', filterRows);
+            form.addEventListener('submit', function(e){ e.preventDefault(); filterRows(); });
+        });
+    </script>
+}
+</div>
